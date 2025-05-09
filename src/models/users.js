@@ -22,11 +22,12 @@ const User = database.define("user", {
     type: {
         type: DataTypes.TEXT,
         allowNull: false,
+        defaultValue: "Funcionário"
     },
 
     password: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: false,
     }
 },
     {

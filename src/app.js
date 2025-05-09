@@ -1,9 +1,15 @@
 import cors from "cors"
-import express from "express"
+import express, { json, Router } from "express"
+import userRouter from "./routes/users.js"
 
+const router = Router()
 const app = express()
 
 app.use(cors())
-app.use(express.json())
+app.use(json())
+
+router.use("/users", userRouter)
+
+app.use(router)
 
 export default app
