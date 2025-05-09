@@ -1,12 +1,12 @@
 import env_config from "./config.js"
+import postgres from "pg"
 import Sequelize from "sequelize"
-
-
 
 const database_url = env_config.DATABASE_URL
 
 const dbConfig = {
-    dialect: "postgres"
+    dialect: "postgres",
+    dialectModule: postgres
 }
 
 const database = new Sequelize(database_url, dbConfig)
