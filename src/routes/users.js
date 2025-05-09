@@ -1,4 +1,4 @@
-import { create } from "../controllers/users.js"
+import { create, signIn } from "../controllers/users.js"
 import { Router } from "express"
 
 const userRouter = Router()
@@ -50,6 +50,36 @@ userRouter.post("/", async (req, res) => {
     
     catch (err) {
         return res.status(400).send(err.message)
+    }
+})
+
+userRouter.post("/signin", async (req, res) => {
+    try {
+        const {email, password} = req.body
+
+        if (!email) {
+            return res.status(400).send("Campo email obrigatório!")
+        }
+
+        else if (email.length > 60) {
+            return res.status(400).send("Campo email deve conter no máximo 60 caracteres!")
+        }
+        
+        else if (!password) {
+            return res.status(400).send("Campo senha obrigatório!")
+        }
+
+        else if (password.length > 18) {
+            return res.status(400).send("Campo senha deve conter no máximo 18 caracteres!")
+        }
+
+        const token = await signIn(email, password)
+
+        return res.status(200).send(token)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message) 
     }
 })
 
