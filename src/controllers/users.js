@@ -1,3 +1,4 @@
+import { createTransport } from "nodemailer"
 import { compare, hash } from "bcrypt"
 import envConfig from "../config/config.js"
 import jwt from "jsonwebtoken"
