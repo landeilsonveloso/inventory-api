@@ -1,5 +1,6 @@
-import { create, signIn } from "../controllers/users.js"
+import { create, signIn, forgotPassword, redefinePassword, findByPk, update, destroy } from "../controllers/users.js"
 import { Router } from "express"
+import verifyToken from "../middlewares/auth.js"
 
 const userRouter = Router()
 
@@ -80,6 +81,122 @@ userRouter.post("/signin", async (req, res) => {
     
     catch (err) {
         return res.status(400).send(err.message) 
+    }
+})
+
+userRouter.post("/forgotpassword", async (req, res) => {
+    try {
+        const email = req.body.email
+
+        if (!email) {
+            return res.status(400).send("Campo email obrigatório!")
+        }
+
+        else if (email.length > 60) {
+            return res.status(400).send("Campo email deve conter no máximo 60 caracteres!")
+        }
+
+        const token = await forgotPassword(email)
+
+        return res.status(200).send(token)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+userRouter.put("/redefinepassword", verifyToken, async (req, res) => {
+    try {
+        const id = req.userId
+        const {password, confirmPassword} = req.body
+
+        if (!password) {
+            return res.status(400).send("Campo nova senha obrigatório!")
+        }
+
+        else if (password.length < 6 || password.length > 18) {
+            return res.status(400).send("Campo nova senha deve conter entre 6 e 18 caracteres!")
+        }
+        
+        else if (!confirmPassword) {
+            return res.status(400).send("Campo confirmar nova senha obrigatório!")
+        }
+
+        else if (confirmPassword.length < 6 || confirmPassword.length > 18) {
+            return res.status(400).send("Campo confirmar nova senha deve conter entre 6 e 18 caracteres!")
+        }
+        
+        else if (password != confirmPassword) {
+            return res.status(400).send("Campos nova senha e confirmar nova senha distintos!")
+        }
+
+        await redefinePassword(id, password)
+
+        return res.status(200).send("Senha redefinida com sucesso!")
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+userRouter.get("/", verifyToken, async (req, res) => {
+    try {
+        const id = req.userId
+
+        const user = await findByPk(id)
+
+        return res.status(200).send(user)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+userRouter.put("/", verifyToken, async (req, res) => {
+    try {
+        const id = req.userId
+        const {name, email} = req.body
+
+        if (!name) {
+            return res.status(400).send("Campo nome obrigatório!")
+        }
+
+        else if (name.length < 3 || name.length > 30) {
+            return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
+        }
+    
+        else if (!email) {
+            return res.status(400).send("Campo email obrigatório!")
+        }
+
+        else if (email.length < 12 || email.length > 60) {
+            return res.status(400).send("Campo email deve conter entre 12 e 60 caracteres!")
+        }
+
+        await update(id, name, email)
+
+        return res.status(200).send("Usuário atualizado com sucesso!")
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+userRouter.delete("/", verifyToken, async (req, res) => {
+    try {
+        const id = req.userId
+
+        await destroy(id)
+
+        return res.status(200).send("Conta excluida com sucesso!")
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
     }
 })
 
