@@ -1,7 +1,7 @@
 import database from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-const User = database.define("user", {
+const Client = database.define("client", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -13,20 +13,25 @@ const User = database.define("user", {
         allowNull: false
     },
 
-    email: {
+    nickname: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false
     },
 
-    password: {
-        type: DataTypes.STRING,
+    contact: {
+        type: DataTypes.STRING
+    },
+
+    userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        references: {model: "users"}
     }
-},
+}, 
+
     {
         timestamps: false
     }
 )
 
-export default User
+export default Client
