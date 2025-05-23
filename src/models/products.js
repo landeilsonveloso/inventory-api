@@ -18,6 +18,11 @@ const Product = database.define("product", {
         allowNull: false
     },
 
+    cost: {
+        type: DataTypes.DOUBLE,
+        allowNull: false
+    },
+
     price: {
         type: DataTypes.DOUBLE,
         allowNull: false
@@ -28,10 +33,9 @@ const Product = database.define("product", {
         allowNull: false
     },
 
-    categoryId: {
-        type: DataTypes.INTEGER,
+    category: {
+        type: DataTypes.STRING,
         allowNull: false,
-        references: {model: "categories"}
     },
 
     supplierId: {
