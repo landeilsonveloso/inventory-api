@@ -8,6 +8,12 @@ const Supplier = database.define("supplier", {
         primaryKey: true
     },
 
+    cnpjOrCpf: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
+    },
+
     name: {
         type: DataTypes.STRING,
         allowNull: false
