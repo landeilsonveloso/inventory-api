@@ -1,5 +1,4 @@
 import Category from "../models/categories.js"
-import Client from "../models/clients.js"
 import database from "./database.js"
 import Product from "../models/products.js"
 import Supplier from "../models/suppliers.js"
@@ -11,7 +10,6 @@ export const syncAll = async () => {
         await Category.sync({alter: true})
         await Supplier.sync({alter: true})
         await Product.sync({alter: true})
-        await Client.sync({alter: true})
     }
     
     catch (error) {
