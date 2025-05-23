@@ -15,7 +15,6 @@ const Product = database.define("product", {
 
     description: {
         type: DataTypes.STRING,
-        allowNull: false
     },
 
     cost: {
@@ -31,16 +30,6 @@ const Product = database.define("product", {
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-
-    category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-
-    supplierId: {
-        type: DataTypes.INTEGER,
-        references: {model: "suppliers"}
     },
 
     userId: {
