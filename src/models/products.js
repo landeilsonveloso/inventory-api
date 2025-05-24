@@ -15,6 +15,7 @@ const Product = database.define("product", {
 
     description: {
         type: DataTypes.STRING,
+        allowNull: false,
     },
 
     cost: {

@@ -21,6 +21,14 @@ productRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo custo obrigatório!")
         }
 
+        if (!description) {
+            return res.status(400).send("Campo descrição obrigatório!")
+        }
+
+        else if (description.length > 30) {
+            return res.status(400).send("Campo descrição deve conter no máximo 30 caracteres!")
+        }
+
         else if (!price) {
             return res.status(400).send("Campo preço obrigatório!")
         }
@@ -64,6 +72,14 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
 
         else if (name.length < 3 || name.length > 30) {
             return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
+        }
+
+        if (!description) {
+            return res.status(400).send("Campo descrição obrigatório!")
+        }
+
+        else if (description.length > 30) {
+            return res.status(400).send("Campo descrição deve conter no máximo 30 caracteres!")
         }
 
         else if (!cost) {
