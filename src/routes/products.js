@@ -96,7 +96,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
 
         await await(id, name, description, cost, price, quantity)
 
-        res.status(201).send("Produto atualizado com sucesso!")
+        res.status(200).send("Produto atualizado com sucesso!")
     }
     
     catch (err) {
@@ -110,7 +110,7 @@ productRouter.delete("/:id", verifyToken, async (req, res) => {
 
         await destroy(id)
 
-        res.status(201).send("Produto excluido com sucesso!")
+        res.status(200).send("Produto excluido com sucesso!")
     }
     
     catch (err) {
