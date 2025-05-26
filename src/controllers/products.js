@@ -18,7 +18,7 @@ export const create = async (name, description, cost, price, quantity, userId) =
 
 export const findAll = async (userId) => {
     try {
-        return await Product.findAll({ order: [["name", "ASC"]], where: {userId}})
+        return await Product.findAll({order: [["name", "ASC"]], where: {userId}})
     }
     
     catch (err) {

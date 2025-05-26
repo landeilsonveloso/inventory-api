@@ -53,7 +53,7 @@ productRouter.get("/", verifyToken, async (req, res) => {
 
         const products = await findAll(userId)
 
-        res.status(201).send(products)
+        res.status(200).send(products)
     }
     
     catch (err) {
