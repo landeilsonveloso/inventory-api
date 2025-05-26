@@ -30,6 +30,8 @@ export const update = async (id, name, description, cost, price, quantity) => {
     try {
         const product = await Product.findOne({where: {name}})
 
+        console.log(product)
+
         if (product && id != product.id) {
             throw new Error("Usuário já cadastrado!")
         }

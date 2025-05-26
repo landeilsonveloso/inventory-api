@@ -94,7 +94,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
 
-        await await(id, name, description, cost, price, quantity)
+        await update(id, name, description, cost, price, quantity)
 
         res.status(200).send("Produto atualizado com sucesso!")
     }
