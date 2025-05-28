@@ -1,7 +1,7 @@
 import database from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-const Sale = database.define("sale", {
+const Transaction = database.define("transaction", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -28,6 +28,11 @@ const Sale = database.define("sale", {
         allowNull: false
     },
 
+    type: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -40,4 +45,4 @@ const Sale = database.define("sale", {
     }
 )
 
-export default Sale
+export default Transaction

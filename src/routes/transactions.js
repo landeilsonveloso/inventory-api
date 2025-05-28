@@ -1,13 +1,13 @@
-import { create, destroy, findAll, update } from "../controllers/sales.js"
+import { create, destroy, findAll, update } from "../controllers/transactions.js"
 import { Router } from "express"
 import verifyToken from "../middlewares/auth.js"
 
-const saleRouter = Router()
+const transactionRouter = Router()
 
-saleRouter.post("/", verifyToken, async (req, res) => {
+transactionRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {description, date, value, method} = req.body
+        const {description, date, value, method, type} = req.body
 
         if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
@@ -29,9 +29,9 @@ saleRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo forma de pagamento obrigatório!")
         }
         
-        await create(description, date, value, method, userId)
+        await create(description, date, value, method, type, userId)
         
-        res.status(201).send("Venda cadastrada com sucesso!")
+        res.status(201).send("Transação cadastrada com sucesso!")
     }
     
     catch (err) {
@@ -39,13 +39,14 @@ saleRouter.post("/", verifyToken, async (req, res) => {
     }
 })
 
-saleRouter.get("/", verifyToken, async (req, res) => {
+transactionRouter.get("/:type", verifyToken, async (req, res) => {
     try {
+        const type = req.params.type
         const userId = req.userId
 
-        const sales = await findAll(userId)
+        const trasactions = await findAll(type, userId)
 
-        res.status(200).send(sales)
+        res.status(200).send(trasactions)
     }
     
     catch (err) {
@@ -53,7 +54,7 @@ saleRouter.get("/", verifyToken, async (req, res) => {
     }
 })
 
-saleRouter.put("/:id", verifyToken, async (req, res) => {
+transactionRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const {description, date, value, method} = req.body
@@ -80,7 +81,7 @@ saleRouter.put("/:id", verifyToken, async (req, res) => {
         
         await update(id, description, date, value, method)
         
-        res.status(201).send("Venda atualizada com sucesso!")
+        res.status(201).send("Transação atualizada com sucesso!")
     }
     
     catch (err) {
@@ -88,13 +89,13 @@ saleRouter.put("/:id", verifyToken, async (req, res) => {
     }
 })
 
-saleRouter.delete("/:id", verifyToken, async (req, res) => {
+transactionRouter.delete("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
 
         await destroy(id)
 
-        res.status(200).send("Venda excluida com sucesso!")
+        res.status(200).send("Transação excluida com sucesso!")
     }
     
     catch (err) {
@@ -102,4 +103,4 @@ saleRouter.delete("/:id", verifyToken, async (req, res) => {
     }
 })
 
-export default saleRouter
+export default transactionRouter
