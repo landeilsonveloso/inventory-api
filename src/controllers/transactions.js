@@ -10,9 +10,29 @@ export const create = async (description, date, value, method, type, userId) => 
     }
 }
 
-export const findAll = async (type, userId) => {
+export const findAll = async (userId) => {
     try {
-        return await Transaction.findAll({order: [["date", "DESC"]], where: {type, userId}})
+        return await Transaction.findAll({order: [["date", "DESC"]], where: {userId}})
+    }
+    
+    catch (err) {
+        throw new Error(err.message)
+    }
+}
+
+export const findInflows = async (userId) => {
+    try {
+        return await Transaction.findAll({order: [["date", "DESC"]], where: {type: "Entrada", userId}})
+    }
+    
+    catch (err) {
+        throw new Error(err.message)
+    }
+}
+
+export const findOutflows = async (userId) => {
+    try {
+        return await Transaction.findAll({order: [["date", "DESC"]], where: {type: "Saída", userId}})
     }
     
     catch (err) {

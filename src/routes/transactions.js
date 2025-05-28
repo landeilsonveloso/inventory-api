@@ -1,4 +1,4 @@
-import { create, destroy, findAll, update } from "../controllers/transactions.js"
+import { create, destroy, findAll, findInflows, findOutflows, update } from "../controllers/transactions.js"
 import { Router } from "express"
 import verifyToken from "../middlewares/auth.js"
 
@@ -39,12 +39,11 @@ transactionRouter.post("/", verifyToken, async (req, res) => {
     }
 })
 
-transactionRouter.get("/:type", verifyToken, async (req, res) => {
+transactionRouter.get("/", verifyToken, async (req, res) => {
     try {
-        const type = req.params.type
         const userId = req.userId
 
-        const trasactions = await findAll(type, userId)
+        const trasactions = await findAll(userId)
 
         res.status(200).send(trasactions)
     }
@@ -53,6 +52,35 @@ transactionRouter.get("/:type", verifyToken, async (req, res) => {
         return res.status(400).send(err.message)
     }
 })
+
+transactionRouter.get("/inflows", verifyToken, async (req, res) => {
+    try {
+        const userId = req.userId
+
+        const inflows = await findInflows(userId)
+
+        res.status(200).send(inflows)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+transactionRouter.get("/outflows", verifyToken, async (req, res) => {
+    try {
+        const userId = req.userId
+
+        const outflows = await findOutflows(userId)
+
+        res.status(200).send(outflows)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
 
 transactionRouter.put("/:id", verifyToken, async (req, res) => {
     try {
