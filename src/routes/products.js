@@ -16,17 +16,17 @@ productRouter.post("/", verifyToken, async (req, res) => {
         else if (name.length < 3 || name.length > 30) {
             return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
         }
-
-        else if (!cost) {
-            return res.status(400).send("Campo custo obrigatório!")
-        }
-
-        if (!description) {
+        
+        else if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
         else if (description.length > 30) {
             return res.status(400).send("Campo descrição deve conter no máximo 30 caracteres!")
+        }
+
+        else if (!cost) {
+            return res.status(400).send("Campo custo obrigatório!")
         }
 
         else if (!price) {
@@ -64,6 +64,7 @@ productRouter.get("/", verifyToken, async (req, res) => {
 productRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
+        const userId = req.userId
         const {name, description, cost, price, quantity} = req.body
 
         if (!name) {
@@ -74,7 +75,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
         }
 
-        if (!description) {
+        else if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
@@ -94,7 +95,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
 
-        await update(id, name, description, cost, price, quantity)
+        await update(id, name, description, cost, price, quantity, userId)
 
         res.status(200).send("Produto atualizado com sucesso!")
     }

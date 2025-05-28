@@ -26,14 +26,12 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, name, description, cost, price, quantity) => {
+export const update = async (id, name, description, cost, price, quantity, userId) => {
     try {
-        const product = await Product.findOne({where: {name}})
-
-        console.log(product)
+        const product = await Product.findOne({where: {name, userId}})
 
         if (product && id != product.id) {
-            throw new Error("Usuário já cadastrado!")
+            throw new Error("Produto já cadastrado!")
         }
 
         return await Product.update({name, description, cost, price, quantity}, {where: {id}})
