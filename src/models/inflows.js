@@ -1,7 +1,7 @@
 import database from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-const Transaction = database.define("transaction", {
+const Inflow = database.define("inflow", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -28,11 +28,6 @@ const Transaction = database.define("transaction", {
         allowNull: false
     },
 
-    type: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -45,4 +40,4 @@ const Transaction = database.define("transaction", {
     }
 )
 
-export default Transaction
+export default Inflow

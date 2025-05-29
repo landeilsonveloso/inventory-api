@@ -1,7 +1,8 @@
 import cors from "cors"
 import express, { json, Router } from "express"
+import inflowRouter from "./routes/inflows.js"
+import outflowRouter from "./routes/outflows.js"
 import productRouter from "./routes/products.js"
-import transactionRouter from "./routes/transactions.js"
 import userRouter from "./routes/users.js"
 
 const router = Router()
@@ -12,7 +13,8 @@ app.use(json())
 
 router.use("/users", userRouter)
 router.use("/products", productRouter)
-router.use("/transactions", transactionRouter)
+router.use("/inflows", inflowRouter)
+router.use("/outflows", outflowRouter)
 
 app.use(router)
 
