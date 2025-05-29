@@ -80,7 +80,7 @@ inflowRouter.put("/:id", verifyToken, async (req, res) => {
         
         await update(id, description, date, value, method)
         
-        res.status(201).send("Entrada atualizada com sucesso!")
+        res.status(200).send("Entrada atualizada com sucesso!")
     }
     
     catch (err) {

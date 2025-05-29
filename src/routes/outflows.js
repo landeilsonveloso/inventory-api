@@ -80,7 +80,7 @@ outflowRouter.put("/:id", verifyToken, async (req, res) => {
         
         await update(id, description, date, value, method)
         
-        res.status(201).send("Saída atualizada com sucesso!")
+        res.status(200).send("Saída atualizada com sucesso!")
     }
     
     catch (err) {
