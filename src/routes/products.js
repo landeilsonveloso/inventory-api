@@ -13,16 +13,16 @@ productRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo nome obrigatório!")
         }
 
-        else if (name.length < 3 || name.length > 30) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
+        else if (name.length < 3 || name.length > 60) {
+            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
         }
         
         else if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (description.length > 30) {
-            return res.status(400).send("Campo descrição deve conter no máximo 30 caracteres!")
+        else if (description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter no máximo 60 caracteres!")
         }
 
         else if (!cost) {
@@ -71,16 +71,16 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo nome obrigatório!")
         }
 
-        else if (name.length < 3 || name.length > 30) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 30 caracteres!")
+        else if (name.length < 3 || name.length > 60) {
+            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
         }
 
         else if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (description.length > 30) {
-            return res.status(400).send("Campo descrição deve conter no máximo 30 caracteres!")
+        else if (description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter no máximo 60 caracteres!")
         }
 
         else if (!cost) {
