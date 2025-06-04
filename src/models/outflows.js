@@ -19,7 +19,7 @@ const Outflow = database.define("outflow", {
     },
 
     value: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
 

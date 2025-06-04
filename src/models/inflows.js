@@ -19,7 +19,7 @@ const Inflow = database.define("inflow", {
     },
 
     value: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
 

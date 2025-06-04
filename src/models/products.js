@@ -19,12 +19,12 @@ const Product = database.define("product", {
     },
 
     cost: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
 
     price: {
-        type: DataTypes.DOUBLE,
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
 
