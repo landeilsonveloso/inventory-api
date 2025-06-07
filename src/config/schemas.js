@@ -20,8 +20,6 @@ export const dropAll = async () => {
     try {
         await Outflow.drop({force: true})
         await Inflow.drop({force: true})
-        await Product.drop({force: true})
-        await User.drop({force: true})
     }
     
     catch (err) {

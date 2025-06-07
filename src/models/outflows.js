@@ -18,13 +18,23 @@ const Outflow = database.define("outflow", {
         allowNull: false
     },
 
-    value: {
+    unitValue: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+    },
+
+    quantity: {
         type: DataTypes.DECIMAL,
         allowNull: false
     },
 
     method: {
         type: DataTypes.STRING,
+        allowNull: false
+    },
+
+    totalValue: {
+        type: DataTypes.DECIMAL,
         allowNull: false
     },
 
