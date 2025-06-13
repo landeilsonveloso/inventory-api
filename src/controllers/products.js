@@ -31,7 +31,7 @@ export const sell = async (id, description, date, unitValue, quantity, method, t
     try {
         const product = await Product.findByPk(id)
 
-        if (product.quantity === 0) {
+        if (product.quantity <= 0) {
             throw new Error("Não há produto no estoque!")
         }
 
