@@ -63,7 +63,7 @@ productRouter.get("/", verifyToken, async (req, res) => {
 
 productRouter.put("/sell/:id", verifyToken, async (req, res) => {
     try {
-        const id = req.params
+        const id = req.params.id
         const userId = req.userId
         const {description, date, unitValue, quantity, method, totalValue} = req.body
 
