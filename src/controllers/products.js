@@ -37,7 +37,7 @@ export const sell = async (id, description, date, unitValue, quantity, method, t
 
         await Inflow.create({description, date, unitValue, quantity, method, totalValue, userId})
 
-        await product.decrement("quantity", {by: product.quantity - quantity})
+        await Product.update({quantity: product.quantity - quantity}, {where: {id}})
     }
     
     catch (err) {
