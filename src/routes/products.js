@@ -95,7 +95,7 @@ productRouter.put("/sell/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo valor total obrigatório!")
         }
         
-        await sell(description, date, unitValue, quantity, method, totalValue, userId)
+        await sell(id, description, date, unitValue, quantity, method, totalValue, userId)
         
         res.status(201).send("Venda cadastrada com sucesso!")
     }
