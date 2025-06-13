@@ -1,3 +1,4 @@
+import Inflow from "../models/inflows.js"
 import Product from "../models/products.js"
 
 export const create = async (name, description, cost, price, quantity, userId) => {
@@ -19,6 +20,24 @@ export const create = async (name, description, cost, price, quantity, userId) =
 export const findAll = async (userId) => {
     try {
         return await Product.findAll({order: [["name", "ASC"]], where: {userId}})
+    }
+    
+    catch (err) {
+        throw new Error(err.message)
+    }
+}
+
+export const sell = async (id, description, date, unitValue, quantity, method, totalValue, userId) => {
+    try {
+        const product = await Product.findOne({where: {name: description, userId}})
+
+        if (product.quantity === 0) {
+            throw new Error("Não há produto no estoque!")
+        }
+
+        await Inflow.create({description, date, unitValue, quantity, method, totalValue})
+
+        await Product.decrement("quantity", {by: 1, where: {id}})
     }
     
     catch (err) {

@@ -1,4 +1,4 @@
-import { create, destroy, findAll, update } from "../controllers/products.js"
+import { create, destroy, findAll, sell, update } from "../controllers/products.js"
 import { Router } from "express"
 import verifyToken from "../middlewares/auth.js"
 
@@ -54,6 +54,50 @@ productRouter.get("/", verifyToken, async (req, res) => {
         const products = await findAll(userId)
 
         res.status(200).send(products)
+    }
+    
+    catch (err) {
+        return res.status(400).send(err.message)
+    }
+})
+
+productRouter.put("/sell/:id", verifyToken, async (req, res) => {
+    try {
+        const id = req.params
+        const userId = req.userId
+        const {description, date, unitValue, quantity, method, totalValue} = req.body
+
+        if (!description) {
+            return res.status(400).send("Campo descrição obrigatório!")
+        }
+
+        else if (description.length < 3 || description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
+        }
+
+        else if (!date) {
+            return res.status(400).send("Campo data obrigatório!")
+        }
+
+        else if (!unitValue) {
+            return res.status(400).send("Campo valor unitário obrigatório!")
+        }
+
+        else if (!quantity) {
+            return res.status(400).send("Campo quantidade obrigatório!")
+        }
+
+        else if (!method) {
+            return res.status(400).send("Campo forma de pagamento obrigatório!")
+        }
+
+        else if (!totalValue) {
+            return res.status(400).send("Campo valor total obrigatório!")
+        }
+        
+        await sell(description, date, unitValue, quantity, method, totalValue, userId)
+        
+        res.status(201).send("Venda cadastrada com sucesso!")
     }
     
     catch (err) {
