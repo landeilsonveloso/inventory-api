@@ -31,13 +31,13 @@ export const sell = async (id, description, date, unitValue, quantity, method, t
     try {
         const product = await Product.findByPk(id)
 
-        if (product.quantity <= 0) {
-            throw new Error("Não há produto no estoque!")
+        if (product.quantity < 1 || product.quantity < quantity) {
+            throw new Error("Não há produto suficiente no estoque!")
         }
 
         await Inflow.create({description, date, unitValue, quantity, method, totalValue, userId})
 
-        await product.decrement("quantity", {by: 1})
+        await product.decrement("quantity", {by: product.quantity - quantity})
     }
     
     catch (err) {
