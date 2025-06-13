@@ -97,7 +97,7 @@ productRouter.put("/sell/:id", verifyToken, async (req, res) => {
         
         await sell(id, description, date, unitValue, quantity, method, totalValue, userId)
         
-        res.status(201).send("Venda cadastrada com sucesso!")
+        res.status(201).send("Venda realizada com sucesso!")
     }
     
     catch (err) {
