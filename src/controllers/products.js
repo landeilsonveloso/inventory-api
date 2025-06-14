@@ -35,9 +35,9 @@ export const sell = async (id, description, date, unitValue, quantity, method, t
             throw new Error("Não há produto suficiente no estoque!")
         }
 
-        await Inflow.create({description, date, unitValue, quantity, method, totalValue, userId})
+        await product.decrement("quantity", {by: quantity})
 
-        await Product.update({quantity: product.quantity - quantity}, {where: {id}})
+        await Inflow.create({description, date, unitValue, quantity, method, totalValue, userId})
     }
     
     catch (err) {
