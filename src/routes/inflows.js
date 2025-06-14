@@ -64,8 +64,7 @@ inflowRouter.get("/", verifyToken, async (req, res) => {
 inflowRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
-        const userId = req.userId
-        const {description, date, unitValue, quantity, method, totalValue} = req.body
+        const {description, date, unitValue, quantity, method, totalValue, productId} = req.body
 
         if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
@@ -95,7 +94,7 @@ inflowRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo valor total obrigatório!")
         }
         
-        await update(id, description, date, unitValue, quantity, method, totalValue, userId)
+        await update(id, description, date, unitValue, quantity, method, totalValue, productId)
         
         res.status(200).send("Entrada atualizada com sucesso!")
     }

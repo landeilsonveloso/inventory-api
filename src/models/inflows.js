@@ -38,6 +38,10 @@ const Inflow = database.define("inflow", {
         allowNull: false
     },
 
+    productId: {
+        type: DataTypes.INTEGER
+    },
+
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,

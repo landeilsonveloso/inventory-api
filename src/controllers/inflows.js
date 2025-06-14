@@ -21,13 +21,11 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, description, date, unitValue, quantity, method, totalValue) => {
+export const update = async (id, description, date, unitValue, quantity, method, totalValue, productId) => {
     try {
         const inflow = await Inflow.findByPk(id)
 
-        await Inflow.update({description, date, unitValue, quantity, method, totalValue}, {where: {id}})
-
-        const product = await Product.findOne({where: {name: description, userId}})
+        const product = await Product.findByPk(productId)
 
         if (product) {
             if (inflow.quantity < quantity) {
@@ -44,6 +42,8 @@ export const update = async (id, description, date, unitValue, quantity, method,
                 await product.increment("quantity", {by: inflow.quantity - quantity})
             }
         }
+
+        await Inflow.update({description, date, unitValue, quantity, method, totalValue}, {where: {id}})
     }
     
     catch (err) {

@@ -27,7 +27,7 @@ export const findAll = async (userId) => {
     }
 }
 
-export const sell = async (id, description, date, unitValue, quantity, method, totalValue, userId) => {
+export const sell = async (id, description, date, unitValue, quantity, method, totalValue, productId, userId) => {
     try {
         const product = await Product.findByPk(id)
 
@@ -37,7 +37,7 @@ export const sell = async (id, description, date, unitValue, quantity, method, t
 
         await product.decrement("quantity", {by: quantity})
 
-        await Inflow.create({description, date, unitValue, quantity, method, totalValue, userId})
+        await Inflow.create({description, date, unitValue, quantity, method, totalValue, productId, userId})
     }
     
     catch (err) {
