@@ -22,7 +22,7 @@ export const findAll = async (userId) => {
 
 export const update = async (id, description, date, unitValue, quantity, method, totalValue) => {
     try {
-        return await Inflow.update({description, date, unitValue, quantity, method, totalValue}, {where: {id}})
+        await Inflow.update({description, date, unitValue, quantity, method, totalValue}, {where: {id}})
     }
     
     catch (err) {

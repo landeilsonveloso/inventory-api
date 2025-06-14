@@ -116,7 +116,7 @@ export const update = async (id, name, email) => {
             throw new Error("Usuário já cadastrado!")
         }
 
-        return await User.update({name, email}, {where: {id}})
+        await User.update({name, email}, {where: {id}})
     }
     
     catch (err) {

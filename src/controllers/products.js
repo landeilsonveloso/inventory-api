@@ -53,7 +53,7 @@ export const update = async (id, name, description, cost, price, quantity, userI
             throw new Error("Produto já cadastrado!")
         }
 
-        return await Product.update({name, description, cost, price, quantity}, {where: {id}})
+        await Product.update({name, description, cost, price, quantity}, {where: {id}})
     }
     
     catch (err) {
