@@ -25,7 +25,7 @@ export const update = async (id, description, date, unitValue, quantity, method,
     try {
         const inflow = await Inflow.findByPk(id)
 
-        const product = await Product.findByPk(productId)
+        const product = await Product.findOne({where: {id: productId}})
 
         if (product) {
             if (inflow.quantity < quantity) {
