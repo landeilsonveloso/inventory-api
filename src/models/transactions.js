@@ -1,14 +1,14 @@
 import database from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-const Inflow = database.define("inflow", {
+const Transaction = database.define("transaction", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
 
-    description: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -18,13 +18,8 @@ const Inflow = database.define("inflow", {
         allowNull: false
     },
 
-    unitValue: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-    },
-
-    quantity: {
-        type: DataTypes.DECIMAL,
+    type: {
+        type: DataTypes.STRING,
         allowNull: false
     },
 
@@ -33,13 +28,9 @@ const Inflow = database.define("inflow", {
         allowNull: false
     },
 
-    totalValue: {
+    value: {
         type: DataTypes.DECIMAL,
         allowNull: false
-    },
-
-    productId: {
-        type: DataTypes.INTEGER
     },
 
     userId: {
@@ -54,4 +45,4 @@ const Inflow = database.define("inflow", {
     }
 )
 
-export default Inflow
+export default Transaction

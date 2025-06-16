@@ -1,39 +1,19 @@
 import database from "../config/database.js"
 import { DataTypes } from "sequelize"
 
-const Outflow = database.define("outflow", {
+const Service = database.define("service", {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
 
-    description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-
-    date: {
-        type: DataTypes.DATEONLY,
-        allowNull: false
-    },
-
-    unitValue: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-    },
-
-    quantity: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-    },
-
-    method: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
-    totalValue: {
+    value: {
         type: DataTypes.DECIMAL,
         allowNull: false
     },
@@ -50,4 +30,4 @@ const Outflow = database.define("outflow", {
     }
 )
 
-export default Outflow
+export default Service

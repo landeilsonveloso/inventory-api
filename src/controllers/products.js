@@ -1,7 +1,6 @@
-import Inflow from "../models/inflows.js"
 import Product from "../models/products.js"
 
-export const create = async (name, description, cost, price, quantity, userId) => {
+export const create = async (name, description, value, quantity, userId) => {
     try {
         const product = await Product.findOne({where: {name, userId}})
     
@@ -9,7 +8,7 @@ export const create = async (name, description, cost, price, quantity, userId) =
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.create({name, description, cost, price, quantity, userId})
+        await Product.create({name, description, value, quantity, userId})
     }
     
     catch (err) {
@@ -27,25 +26,7 @@ export const findAll = async (userId) => {
     }
 }
 
-export const sell = async (id, description, date, unitValue, quantity, method, totalValue, productId, userId) => {
-    try {
-        const product = await Product.findByPk(id)
-
-        if (product.quantity < 1 || product.quantity < quantity) {
-            throw new Error("Não há produto suficiente no estoque!")
-        }
-
-        await product.decrement("quantity", {by: quantity})
-
-        await Inflow.create({description, date, unitValue, quantity, method, totalValue, productId, userId})
-    }
-    
-    catch (err) {
-        throw new Error(err.message)
-    }
-}
-
-export const update = async (id, name, description, cost, price, quantity, userId) => {
+export const update = async (id, name, description, value, quantity, userId) => {
     try {
         const product = await Product.findOne({where: {name, userId}})
 
@@ -53,7 +34,7 @@ export const update = async (id, name, description, cost, price, quantity, userI
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.update({name, description, cost, price, quantity}, {where: {id}})
+        await Product.update({name, description, value, quantity}, {where: {id}})
     }
     
     catch (err) {
