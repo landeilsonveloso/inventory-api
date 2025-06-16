@@ -1,4 +1,4 @@
-import { create, destroy, findAll, update } from "../controllers/products.js"
+import { create, destroy, findAll, update } from "../controllers/services.js"
 import { Router } from "express"
 import verifyToken from "../middlewares/auth.js"
 
