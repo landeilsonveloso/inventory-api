@@ -1,14 +1,14 @@
 import Service from "../models/services.js"
 
-export const create = async (name, value, userId) => {
+export const create = async (description, value, userId) => {
     try {
-        const service = await Service.findOne({where: {name, userId}})
+        const service = await Service.findOne({where: {description, userId}})
     
         if (service) {
             throw new Error("Serviço já cadastrado!")
         }
 
-        await Service.create({name, value, userId})
+        await Service.create({description, value, userId})
     }
     
     catch (err) {
@@ -18,7 +18,7 @@ export const create = async (name, value, userId) => {
 
 export const findAll = async (userId) => {
     try {
-        return await Service.findAll({order: [["name", "ASC"]], where: {userId}})
+        return await Service.findAll({order: [["description", "ASC"]], where: {userId}})
     }
     
     catch (err) {
@@ -26,15 +26,15 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, name, value, userId) => {
+export const update = async (id, description, value, userId) => {
     try {
-        const service = await Service.findOne({where: {name, userId}})
+        const service = await Service.findOne({where: {description, userId}})
 
         if (service && id != service.id) {
             throw new Error("Serviço já cadastrado!")
         }
 
-        await Service.update({name, value}, {where: {id}})
+        await Service.update({description, value}, {where: {id}})
     }
     
     catch (err) {

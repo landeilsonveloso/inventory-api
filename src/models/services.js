@@ -8,7 +8,7 @@ const Service = database.define("service", {
         primaryKey: true
     },
 
-    name: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
     },

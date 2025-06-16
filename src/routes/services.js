@@ -7,21 +7,21 @@ const serviceRouter = Router()
 serviceRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {name, value} = req.body
+        const {description, value} = req.body
 
-        if (!name) {
-            return res.status(400).send("Campo nome obrigatório!")
+        if (!description) {
+            return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (name.length < 3 || name.length > 60) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
+        else if (description.length < 3 || description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
         
         else if (!value) {
             return res.status(400).send("Campo valor obrigatório!")
         }
         
-        await create(name, value, userId)
+        await create(description, value, userId)
         
         res.status(201).send("Serviço cadastrado com sucesso!")
     }
@@ -49,21 +49,21 @@ serviceRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const userId = req.userId
-        const {name, value} = req.body
+        const {description, value} = req.body
 
-        if (!name) {
-            return res.status(400).send("Campo nome obrigatório!")
+        if (!description) {
+            return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (name.length < 3 || name.length > 60) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
+        else if (description.length < 3 || description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
         
         else if (!value) {
             return res.status(400).send("Campo valor obrigatório!")
         }
         
-        await update(id, name, value, userId)
+        await update(id, description, value, userId)
         
         res.status(200).send("Serviço atualizado com sucesso!")
     }

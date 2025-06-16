@@ -7,22 +7,14 @@ const productRouter = Router()
 productRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {name, description, value, quantity} = req.body
-
-        if (!name) {
-            return res.status(400).send("Campo nome obrigatório!")
-        }
-
-        else if (name.length < 3 || name.length > 60) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
-        }
+        const {description, value, quantity} = req.body
         
-        else if (!description) {
+        if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (description.length > 60) {
-            return res.status(400).send("Campo descrição deve conter no máximo 60 caracteres!")
+        else if (description.length < 3 || description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
 
         else if (!value) {
@@ -33,7 +25,7 @@ productRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
         
-        await create(name, description, value, quantity, userId)
+        await create(description, value, quantity, userId)
         
         res.status(201).send("Produto cadastrado com sucesso!")
     }
@@ -61,22 +53,14 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const userId = req.userId
-        const {name, description, value, quantity} = req.body
-
-        if (!name) {
-            return res.status(400).send("Campo nome obrigatório!")
-        }
-
-        else if (name.length < 3 || name.length > 60) {
-            return res.status(400).send("Campo nome deve conter entre 3 e 60 caracteres!")
-        }
-
-        else if (!description) {
+        const {description, value, quantity} = req.body
+        
+        if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
         }
 
-        else if (description.length > 60) {
-            return res.status(400).send("Campo descrição deve conter no máximo 60 caracteres!")
+        else if (description.length < 3 || description.length > 60) {
+            return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
 
         else if (!value) {
@@ -87,7 +71,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
 
-        await update(id, name, description, value, quantity, userId)
+        await update(id, description, value, quantity, userId)
 
         res.status(200).send("Produto atualizado com sucesso!")
     }

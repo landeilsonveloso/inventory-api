@@ -8,11 +8,6 @@ const Product = database.define("product", {
         primaryKey: true
     },
 
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
     description: {
         type: DataTypes.STRING,
         allowNull: false,

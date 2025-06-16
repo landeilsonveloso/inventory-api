@@ -1,14 +1,14 @@
 import Product from "../models/products.js"
 
-export const create = async (name, description, value, quantity, userId) => {
+export const create = async (description, value, quantity, userId) => {
     try {
-        const product = await Product.findOne({where: {name, userId}})
+        const product = await Product.findOne({where: {description, userId}})
     
         if (product) {
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.create({name, description, value, quantity, userId})
+        await Product.create({description, value, quantity, userId})
     }
     
     catch (err) {
@@ -18,7 +18,7 @@ export const create = async (name, description, value, quantity, userId) => {
 
 export const findAll = async (userId) => {
     try {
-        return await Product.findAll({order: [["name", "ASC"]], where: {userId}})
+        return await Product.findAll({order: [["description", "ASC"]], where: {userId}})
     }
     
     catch (err) {
@@ -26,15 +26,15 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, name, description, value, quantity, userId) => {
+export const update = async (id, description, value, quantity, userId) => {
     try {
-        const product = await Product.findOne({where: {name, userId}})
+        const product = await Product.findOne({where: {description, userId}})
 
         if (product && id != product.id) {
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.update({name, description, value, quantity}, {where: {id}})
+        await Product.update({description, value, quantity}, {where: {id}})
     }
     
     catch (err) {
