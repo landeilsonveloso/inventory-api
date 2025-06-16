@@ -31,7 +31,7 @@ outflowRouter.post("/", verifyToken, async (req, res) => {
         
         await create(description, date, method, value, userId)
         
-        res.status(201).send("Entrada cadastrada com sucesso!")
+        res.status(201).send("Saída cadastrada com sucesso!")
     }
     
     catch (err) {
