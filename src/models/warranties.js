@@ -23,13 +23,13 @@ const Warranty = database.define("warranty", {
         allowNull: false
     },
 
-    startDate: {
+    date: {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
 
-    endDate: {
-        type: DataTypes.DATEONLY,
+    time: {
+        type: DataTypes.STRING,
         allowNull: false
     },
 
