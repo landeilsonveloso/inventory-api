@@ -5,6 +5,7 @@ import outflowRouter from "./routes/outflows.js"
 import productRouter from "./routes/products.js"
 import serviceRouter from "./routes/services.js"
 import userRouter from "./routes/users.js"
+import warrantyRouter from "./routes/warranties.js"
 
 const router = Router()
 const app = express()
@@ -17,6 +18,7 @@ router.use("/products", productRouter)
 router.use("/services", serviceRouter)
 router.use("/inflows", inflowRouter)
 router.use("/outflows", outflowRouter)
+router.use("/warranties", warrantyRouter)
 
 app.use(router)
 
