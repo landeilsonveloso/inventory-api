@@ -33,11 +33,6 @@ const Warranty = database.define("warranty", {
         allowNull: false
     },
 
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -1,8 +1,8 @@
 import Warranty from "../models/warranties.js"
 
-export const create = async (consumer, description, value, date, time, status, userId) => {
+export const create = async (consumer, description, value, date, time, userId) => {
     try {
-        await Warranty.create({consumer, description, value, date, time, status, userId})
+        await Warranty.create({consumer, description, value, date, time, userId})
     }
     
     catch (err) {
@@ -20,9 +20,9 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, consumer, description, value, date, time, status) => {
+export const update = async (id, consumer, description, value, date, time) => {
     try {
-        await Warranty.update({consumer, description, value, date, time, status}, {where: {id}})
+        await Warranty.update({consumer, description, value, date, time}, {where: {id}})
     }
     
     catch (err) {

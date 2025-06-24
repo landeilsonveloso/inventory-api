@@ -7,7 +7,7 @@ const warrantyRouter = Router()
 warrantyRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {consumer, description, value, date, time, status} = req.body
+        const {consumer, description, value, date, time} = req.body
 
         if (!consumer) {
             return res.status(400).send("Campo consumidor obrigatório!")
@@ -36,12 +36,8 @@ warrantyRouter.post("/", verifyToken, async (req, res) => {
         else if (!time) {
             return res.status(400).send("Campo tempo de garantia obrigatório!")
         }
-
-        else if (!status) {
-            return res.status(400).send("Campo status obrigatório!")
-        }
         
-        await create(consumer, description, value, date, time, status, userId)
+        await create(consumer, description, value, date, time, userId)
         
         res.status(201).send("Garantia cadastrada com sucesso!")
     }
@@ -68,7 +64,7 @@ warrantyRouter.get("/", verifyToken, async (req, res) => {
 warrantyRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
-        const {consumer, description, value, date, time, status} = req.body
+        const {consumer, description, value, date, time} = req.body
 
         if (!consumer) {
             return res.status(400).send("Campo consumidor obrigatório!")
@@ -97,12 +93,8 @@ warrantyRouter.put("/:id", verifyToken, async (req, res) => {
         else if (!time) {
             return res.status(400).send("Campo tempo de garantia obrigatório!")
         }
-
-        else if (!status) {
-            return res.status(400).send("Campo status obrigatório!")
-        }
         
-        await update(id, consumer, description, value, date, time, status)
+        await update(id, consumer, description, value, date, time)
         
         res.status(200).send("Garantia atualizada com sucesso!")
     }
