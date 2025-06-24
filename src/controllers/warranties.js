@@ -12,7 +12,7 @@ export const create = async (consumer, description, value, date, time, userId) =
 
 export const findAll = async (userId) => {
     try {
-        await Warranty.findAll({order: [["consumer", "ASC"]], where: {userId}})
+        return await Warranty.findAll({order: [["consumer", "ASC"]], where: {userId}})
     }
     
     catch (err) {
