@@ -7,14 +7,14 @@ const warrantyRouter = Router()
 warrantyRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {consumer, description, value, date, time} = req.body
+        const {client, description, value, date, time} = req.body
 
-        if (!consumer) {
-            return res.status(400).send("Campo consumidor obrigatório!")
+        if (!client) {
+            return res.status(400).send("Campo cliente obrigatório!")
         }
 
-        else if (consumer.length < 3 || consumer.length > 60) {
-            return res.status(400).send("Campo consumidor deve conter entre 3 e 60 caracteres!")
+        else if (client.length < 3 || client.length > 60) {
+            return res.status(400).send("Campo cliente deve conter entre 3 e 60 caracteres!")
         }
 
         else if (!description) {
@@ -37,7 +37,7 @@ warrantyRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo tempo de garantia obrigatório!")
         }
         
-        await create(consumer, description, value, date, time, userId)
+        await create(client, description, value, date, time, userId)
         
         res.status(201).send("Garantia cadastrada com sucesso!")
     }
@@ -64,14 +64,14 @@ warrantyRouter.get("/", verifyToken, async (req, res) => {
 warrantyRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
-        const {consumer, description, value, date, time} = req.body
+        const {client, description, value, date, time} = req.body
 
-        if (!consumer) {
-            return res.status(400).send("Campo consumidor obrigatório!")
+        if (!client) {
+            return res.status(400).send("Campo cliente obrigatório!")
         }
 
-        else if (consumer.length < 3 || consumer.length > 60) {
-            return res.status(400).send("Campo consumidor deve conter entre 3 e 60 caracteres!")
+        else if (client.length < 3 || client.length > 60) {
+            return res.status(400).send("Campo cliente deve conter entre 3 e 60 caracteres!")
         }
 
         else if (!description) {
@@ -94,7 +94,7 @@ warrantyRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo tempo de garantia obrigatório!")
         }
         
-        await update(id, consumer, description, value, date, time)
+        await update(id, client, description, value, date, time)
         
         res.status(200).send("Garantia atualizada com sucesso!")
     }

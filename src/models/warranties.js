@@ -8,7 +8,7 @@ const Warranty = database.define("warranty", {
         primaryKey: true
     },
 
-    consumer: {
+    client: {
         type: DataTypes.STRING,
         allowNull: false,
     },
