@@ -30,7 +30,7 @@ warrantyRouter.post("/", verifyToken, async (req, res) => {
         }
 
         else if (!date) {
-            return res.status(400).send("Campo data de compra obrigatório!")
+            return res.status(400).send("Campo data obrigatório!")
         }
 
         else if (!time) {
@@ -87,7 +87,7 @@ warrantyRouter.put("/:id", verifyToken, async (req, res) => {
         }
 
         else if (!date) {
-            return res.status(400).send("Campo data de compra obrigatório!")
+            return res.status(400).send("Campo data obrigatório!")
         }
 
         else if (!time) {

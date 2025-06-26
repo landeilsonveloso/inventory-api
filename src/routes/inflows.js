@@ -22,7 +22,7 @@ inflowRouter.post("/", verifyToken, async (req, res) => {
         }
 
         else if (!method) {
-            return res.status(400).send("Campo forma de pagamento obrigatório!")
+            return res.status(400).send("Campo método obrigatório!")
         }
 
         else if (!value) {
@@ -71,7 +71,7 @@ inflowRouter.put("/:id", verifyToken, async (req, res) => {
         }
 
         else if (!method) {
-            return res.status(400).send("Campo forma de pagamento obrigatório!")
+            return res.status(400).send("Campo método obrigatório!")
         }
 
         else if (!value) {
