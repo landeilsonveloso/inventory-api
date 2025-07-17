@@ -36,7 +36,7 @@ export const signIn = async (email, password) => {
             throw new Error("Senha inválida!")
         }
         
-        return jwt.sign({userId: user.id}, envConfig.JWT_SECRET, {expiresIn: "6d"})
+        return jwt.sign({userId: user.id}, envConfig.JWT_SECRET, {expiresIn: "7d"})
     }
     
     catch (err) {
