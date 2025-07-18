@@ -7,7 +7,7 @@ const productRouter = Router()
 productRouter.post("/", verifyToken, async (req, res) => {
     try {
         const userId = req.userId
-        const {description, value, quantity} = req.body
+        const {description, cost, price, quantity} = req.body
         
         if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
@@ -17,15 +17,19 @@ productRouter.post("/", verifyToken, async (req, res) => {
             return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
 
-        else if (!value) {
-            return res.status(400).send("Campo valor obrigatório!")
+        else if (!cost) {
+            return res.status(400).send("Campo custo obrigatório!")
+        }
+
+        else if (!price) {
+            return res.status(400).send("Campo preço obrigatório!")
         }
 
         else if (!quantity) {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
         
-        await create(description, value, quantity, userId)
+        await create(description, cost, price, quantity, userId)
         
         res.status(201).send("Produto cadastrado com sucesso!")
     }
@@ -53,7 +57,7 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
     try {
         const id = req.params.id
         const userId = req.userId
-        const {description, value, quantity} = req.body
+        const {description, cost, price, quantity} = req.body
         
         if (!description) {
             return res.status(400).send("Campo descrição obrigatório!")
@@ -63,15 +67,19 @@ productRouter.put("/:id", verifyToken, async (req, res) => {
             return res.status(400).send("Campo descrição deve conter entre 3 e 60 caracteres!")
         }
 
-        else if (!value) {
-            return res.status(400).send("Campo valor obrigatório!")
+        else if (!cost) {
+            return res.status(400).send("Campo custo obrigatório!")
+        }
+
+        else if (!price) {
+            return res.status(400).send("Campo preço obrigatório!")
         }
 
         else if (!quantity) {
             return res.status(400).send("Campo quantidade obrigatório!")
         }
 
-        await update(id, description, value, quantity, userId)
+        await update(id, description, cost, price, quantity, userId)
 
         res.status(200).send("Produto atualizado com sucesso!")
     }

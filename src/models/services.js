@@ -13,7 +13,12 @@ const Service = database.define("service", {
         allowNull: false
     },
 
-    value: {
+    cost: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+    },
+
+    price: {
         type: DataTypes.DECIMAL,
         allowNull: false
     },

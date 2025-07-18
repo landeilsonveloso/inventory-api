@@ -1,6 +1,6 @@
 import Product from "../models/products.js"
 
-export const create = async (description, value, quantity, userId) => {
+export const create = async (description, cost, price, quantity, userId) => {
     try {
         const product = await Product.findOne({where: {description, userId}})
     
@@ -8,7 +8,7 @@ export const create = async (description, value, quantity, userId) => {
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.create({description, value, quantity, userId})
+        await Product.create({description, cost, price, quantity, userId})
     }
     
     catch (err) {
@@ -26,7 +26,7 @@ export const findAll = async (userId) => {
     }
 }
 
-export const update = async (id, description, value, quantity, userId) => {
+export const update = async (id, description, cost, price, quantity, userId) => {
     try {
         const product = await Product.findOne({where: {description, userId}})
 
@@ -34,7 +34,7 @@ export const update = async (id, description, value, quantity, userId) => {
             throw new Error("Produto já cadastrado!")
         }
 
-        await Product.update({description, value, quantity}, {where: {id}})
+        await Product.update({description, cost, price, quantity}, {where: {id}})
     }
     
     catch (err) {
